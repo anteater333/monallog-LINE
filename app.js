@@ -8,7 +8,7 @@ logger.info('monallog socket.io server starts running.')
 /******************************************************/
 
 // set socket.io server
-require('./socket')(server);
+const io = require('./socket')(server);
 
 server.listen(config.PORT, () => {
     logger.info(`listening on ${config.PORT} port!`)

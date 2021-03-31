@@ -7,7 +7,12 @@ let emptyNums = []
 module.exports = (server) => {
     logger.info('setting socket.io services.');
     
-    const io = require('socket.io')(server);
+    const io = require('socket.io')(server, {
+        cors: {
+            origin: "http://localhost:8080",    // 허락하고자 하는 요청 주소
+            methods: ["GET", "POST"]
+        }
+    });
 
     io.on('connection', (socket) => {
         if (emptyNums.length !== 0)
@@ -16,7 +21,7 @@ module.exports = (server) => {
             socket.clientNum = clientNum
             clientNum++;
         }
-        logger.info(`socket connected:: ${socket.id} (#${socket.clientNum})`);
+        logger.info(`socket connected:: ${socket.id} (${socket.conn.remoteAddress} #${socket.clientNum})`);
         
         socket.emit('news', {
             msg: `Hello, client #${socket.clientNum}`,
