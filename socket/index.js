@@ -9,7 +9,7 @@ module.exports = (server) => {
     
     const io = require('socket.io')(server, {
         cors: {
-            origin: "http://localhost:8080",    // 허락하고자 하는 요청 주소
+            origin: ['http://localhost:8080', 'https://anteater333.github.io'],    // 허락하고자 하는 요청 주소, 파일로 분리하자
             methods: ["GET", "POST"]
         }
     });
